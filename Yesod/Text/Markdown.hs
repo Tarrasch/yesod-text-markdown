@@ -8,35 +8,31 @@ module Yesod.Text.Markdown where
 import Yesod.Core (RenderMessage)
 import Text.Hamlet (hamlet)
 import Yesod.Form
-import Yesod.Widget (toWidget)
+import Yesod.Core (HandlerSite)
+import Yesod.Core.Widget
+import Yesod.Persist
 import Data.Text (Text)
 import Data.Text.Lazy (toStrict, fromStrict)
 import Text.Markdown (Markdown (Markdown))
-import Database.Persist ()
-import Database.Persist.Store
+import Database.Persist.Sql
 
 instance PersistField Markdown where
   toPersistValue (Markdown t) = PersistText $ toStrict t
   fromPersistValue (PersistText t) = Right $ Markdown $ fromStrict t
   fromPersistValue _ = Left "Not a PersistText value"
-  sqlType _ = SqlString
-  isNullable _ = False
 
-instance ToField Markdown master where
-    toField = areq markdownField
+instance PersistFieldSql Markdown where
+    sqlType _ = SqlString
 
-instance ToField (Maybe Markdown) master where
-    toField = aopt markdownField
-
-markdownField :: RenderMessage master FormMessage => Field sub master Markdown
+markdownField :: (Monad m, RenderMessage (HandlerSite m) FormMessage) => Field m Markdown
 markdownField = Field
     { fieldParse = parseHelper $ Right . Markdown . fromStrict
     , fieldView = \theId name attrs val _isReq -> toWidget
         [hamlet|$newline never
 <textarea id="#{theId}" name="#{name}" *{attrs}>#{either id extractStrict val}
 |]
+   , fieldEnctype = UrlEncoded -- I choose UrlEncoded because textareaField is
      }
      where
         extractStrict :: Markdown -> Text
         extractStrict (Markdown lt) = toStrict lt
-
