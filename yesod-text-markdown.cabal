@@ -1,11 +1,9 @@
 name:                yesod-text-markdown
 version:             0.1.1
 synopsis:            Yesod support for Text.Markdown.
-description:         The contents of this package is t
-                     use Text.Markdown in a typical yesod project, that is,
-                     this module also contains instances related to
-                     persistence, even though it isn't tightly coupled to
-                     yesod.
+description:         Use Text.Markdown in a typical yesod project.
+                     This module contains instances related to persistence,
+                     even though it isn't tightly coupled to yesod.
                      .
                      This package is different from the yesod-markdown package
                      which uses the pandoc renderer for markdown. The main
