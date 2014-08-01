@@ -1,5 +1,5 @@
 name:                yesod-text-markdown
-version:             0.1.3
+version:             0.1.4
 synopsis:            Yesod support for Text.Markdown.
 description:         Use Text.Markdown in a typical yesod project.
                      This module contains instances related to persistence,
@@ -39,7 +39,7 @@ library
                    , yesod-form           >= 1.3  && < 2.0
                    , yesod-persistent     >= 1.2  && < 2.0
                    , persistent           >= 1.2  && < 2.0
-                   , text                 >= 0.11 && < 1.0
+                   , text                 >= 0.11 && < 2.0
                    , shakespeare          >= 2.0  && < 2.1
   ghc-options: -Wall -fno-warn-orphans
 
