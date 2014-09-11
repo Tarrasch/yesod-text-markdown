@@ -15,6 +15,9 @@ import Data.Text (Text)
 import Data.Text.Lazy (toStrict, fromStrict)
 import Text.Markdown (Markdown (Markdown))
 import Database.Persist.Sql
+import Control.Applicative ((<$>))
+import Control.Monad (mzero)
+import Data.Aeson
 
 instance PersistField Markdown where
   toPersistValue (Markdown t) = PersistText $ toStrict t
@@ -23,6 +26,13 @@ instance PersistField Markdown where
 
 instance PersistFieldSql Markdown where
     sqlType _ = SqlString
+
+instance ToJSON Markdown where
+  toJSON (Markdown text) = object ["markdown" .= text]
+
+instance FromJSON Markdown where
+  parseJSON (Object v) = Markdown <$> v .: "markdown"
+  parseJSON _ = mzero
 
 markdownField :: (Monad m, RenderMessage (HandlerSite m) FormMessage) => Field m Markdown
 markdownField = Field
