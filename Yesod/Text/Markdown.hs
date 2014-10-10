@@ -37,9 +37,9 @@ instance FromJSON Markdown where
 markdownField :: (Monad m, RenderMessage (HandlerSite m) FormMessage) => Field m Markdown
 markdownField = Field
     { fieldParse = parseHelper $ Right . Markdown . fromStrict
-    , fieldView = \theId name attrs val _isReq -> toWidget
+    , fieldView = \theId name attrs val isReq -> toWidget
         [hamlet|$newline never
-<textarea id="#{theId}" name="#{name}" *{attrs}>#{either id extractStrict val}
+<textarea id="#{theId}" name="#{name}" :isReq:required="" *{attrs}>#{either id extractStrict val}
 |]
    , fieldEnctype = UrlEncoded -- I choose UrlEncoded because textareaField is
      }
