@@ -34,6 +34,7 @@ instance FromJSON Markdown where
   parseJSON (Object v) = Markdown <$> v .: "markdown"
   parseJSON _ = mzero
 
+-- | Creates a @\<textarea>@ tag whose returned value is wrapped in a 'Markdown' newtype; see 'Markdown' for details.
 markdownField :: (Monad m, RenderMessage (HandlerSite m) FormMessage) => Field m Markdown
 markdownField = Field
     { fieldParse = parseHelper $ Right . Markdown . fromStrict
