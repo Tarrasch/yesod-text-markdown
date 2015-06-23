@@ -20,7 +20,12 @@ import Text.Markdown (Markdown (Markdown))
 import Database.Persist.Sql
 import Control.Applicative ((<$>))
 import Control.Monad (mzero)
-import Data.Aeson
+import Data.Aeson (ToJSON(toJSON)
+                 , FromJSON(parseJSON)
+                 , (.=)
+                 , (.:)
+                 , object
+                 , Value(Object))
 
 instance PersistField Markdown where
   toPersistValue (Markdown t) = PersistText $ toStrict t
