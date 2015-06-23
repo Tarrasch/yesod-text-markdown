@@ -1,9 +1,12 @@
+-- | In addition to the exports here we also export these instances for 'Markdown'
+--
+-- 'PersistField', 'PersistFieldSql', 'ToJSON', 'FromJSON'
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-module Yesod.Text.Markdown where
+module Yesod.Text.Markdown (markdownField) where
 
 import Yesod.Core (RenderMessage)
 import Text.Hamlet (hamlet)
