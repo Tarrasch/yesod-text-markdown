@@ -1,4 +1,4 @@
--- | In addition to the exports here we also export these instances for 'Markdown'
+-- | In addition to the exports here we also export these instances for 'Markdown':
 --
 -- 'PersistField', 'PersistFieldSql', 'ToJSON', 'FromJSON'
 {-# LANGUAGE QuasiQuotes #-}
