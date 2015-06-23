@@ -16,10 +16,6 @@ description:         Use Text.Markdown in a typical yesod project.
                      This package intentionally tries to be like
                      yesod-markdown, so switching between the markdown backends
                      should be easy.
-                     .
-                     If you wonder why the haddocks only show a few exports,
-                     it's because it doesn't show exporting of instances which
-                     is most of what this package is about.
 
 bug-reports:         https://github.com/Tarrasch/yesod-text-markdown/issues
 license:             BSD3
