@@ -11,7 +11,7 @@ import Yesod.Form
 import Yesod.Core (HandlerSite)
 import Yesod.Core.Widget
 import Yesod.Persist
-import Data.Text (Text)
+import Data.Text (Text, pack)
 import Data.Text.Lazy (toStrict, fromStrict)
 import Text.Markdown (Markdown (Markdown))
 import Database.Persist.Sql
@@ -22,7 +22,7 @@ import Data.Aeson
 instance PersistField Markdown where
   toPersistValue (Markdown t) = PersistText $ toStrict t
   fromPersistValue (PersistText t) = Right $ Markdown $ fromStrict t
-  fromPersistValue _ = Left "Not a PersistText value"
+  fromPersistValue wrongValue = Left $ pack $ "Yesod.Text.Markdown: When attempting to create Markdown from a PersistValue, received " ++ show wrongValue ++ " when a value of type PersistText was expected."
 
 instance PersistFieldSql Markdown where
     sqlType _ = SqlString
